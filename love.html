@@ -13,7 +13,7 @@
             font-family: 'Comic Sans MS', cursive, sans-serif;
             color: pink;
             text-align: center;
-            background: pink url("C:\\Users\\bikae\\OneDrive\\Pictures\\Saved Pictures\\magicly-1739467745293.png") no-repeat center center fixed; /* Добавлен цвет фона для проверки */
+            background: pink url("./images/background.png") no-repeat center center fixed;
             background-size: cover; 
             cursor: pointer; 
         }
@@ -51,7 +51,7 @@
 <body>
     <div id="text-container">Нажми в любом месте</div>
     <audio id="background-music" loop>
-        <source src="C:\Users\bikae\Downloads\fredkingdm_2025-02-13-19-56-16_1739465776869.mp3" type="audio/mpeg"> 
+        <source src="./music/background.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
 
@@ -69,7 +69,6 @@
         const textContainer = document.getElementById('text-container');
         let isMusicPlaying = false;
 
-        
         function createHeart(event) {
             const heart = document.createElement('div');
             heart.innerHTML = '❤';
@@ -79,7 +78,6 @@
             heart.style.fontSize = Math.random() * 24 + 12 + 'px';
             heart.style.animationDuration = Math.random() * 10 + 5 + 's';
             document.body.appendChild(heart);
-
 
             const checkIfAtBottom = () => {
                 const heartRect = heart.getBoundingClientRect();
@@ -92,9 +90,7 @@
             checkIfAtBottom();
         }
 
-        
         document.addEventListener('click', (event) => {
-            
             if (!isMusicPlaying) {
                 const music = document.getElementById('background-music');
                 music.play().then(() => {
@@ -105,10 +101,8 @@
                 isMusicPlaying = true;
             }
 
-            
             createHeart(event);
 
-            
             if (currentTextIndex < texts.length) {
                 textContainer.innerHTML = texts[currentTextIndex];
                 currentTextIndex++;
@@ -117,7 +111,6 @@
             }
         });
 
-       
         setInterval(() => {
             const heart = document.createElement('div');
             heart.innerHTML = '❤';
@@ -128,7 +121,6 @@
             heart.style.animationDuration = Math.random() * 10 + 5 + 's';
             document.body.appendChild(heart);
 
-          
             const checkIfAtBottom = () => {
                 const heartRect = heart.getBoundingClientRect();
                 if (heartRect.bottom >= window.innerHeight) {
@@ -141,4 +133,4 @@
         }, 890);
     </script>
 </body>
-</html>
+</html> 
