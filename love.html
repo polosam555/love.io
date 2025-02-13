@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валентинка для Кати</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: pink;
+            text-align: center;
+            background: pink url("C:\\Users\\bikae\\OneDrive\\Pictures\\Saved Pictures\\magicly-1739467745293.png") no-repeat center center fixed; /* Добавлен цвет фона для проверки */
+            background-size: cover; 
+            cursor: pointer; 
+        }
+        #text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 45px;
+            pointer-events: none; 
+            background: rgba(4,4,7, 0.1); 
+            padding: 45px; 
+            border-radius: 50px; 
+            z-index: 10; 
+            user-select: none; 
+            backdrop-filter: blur(10px); 
+            box-shadow: 0 0 20px 10px rgba(4,4,7, 0.1); 
+            transition: backdrop-filter 0.5s ease, box-shadow 0.5s ease; 
+        }
+        .heart {
+            position: absolute;
+            color: #FFC0CB;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="text-container">Нажми в любом месте</div>
+    <audio id="background-music" loop>
+        <source src="C:\Users\bikae\Downloads\fredkingdm_2025-02-13-19-56-16_1739465776869.mp3" type="audio/mpeg"> 
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
+    <script>
+        const texts = [
+            "Катя, в этой валентинке не уместится вся необъятность моей любви к тебе.",
+            "Она глубже океана, ярче солнца и бесконечнее, чем сама вселенная.",
+            "Ты — не просто часть моей жизни, ты — сама жизнь, дыхание, каждый удар моего сердца.",
+            "Ты — мельчайшая частица меня, без которой я не существую.",
+            "Ты – моя путеводная звезда в кромешной тьме, мой тихий оазис в бушующей пустыне.",
+            "И пусть эта валентинка будет лишь крошечным символом того безграничного чувства, которое я к тебе испытываю.",
+            "Люблю тебя всем своим существом, сегодня, завтра и всегда."
+        ];
+        let currentTextIndex = 0;
+        const textContainer = document.getElementById('text-container');
+        let isMusicPlaying = false;
+
+        
+        function createHeart(event) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.className = 'heart';
+            heart.style.left = event.clientX + 'px';
+            heart.style.top = event.clientY + 'px';
+            heart.style.fontSize = Math.random() * 24 + 12 + 'px';
+            heart.style.animationDuration = Math.random() * 10 + 5 + 's';
+            document.body.appendChild(heart);
+
+
+            const checkIfAtBottom = () => {
+                const heartRect = heart.getBoundingClientRect();
+                if (heartRect.bottom >= window.innerHeight) {
+                    heart.remove();
+                } else {
+                    requestAnimationFrame(checkIfAtBottom);
+                }
+            };
+            checkIfAtBottom();
+        }
+
+        
+        document.addEventListener('click', (event) => {
+            
+            if (!isMusicPlaying) {
+                const music = document.getElementById('background-music');
+                music.play().then(() => {
+                    console.log("Музыка начала играть!");
+                }).catch((error) => {
+                    console.error("Ошибка воспроизведения музыки:", error);
+                });
+                isMusicPlaying = true;
+            }
+
+            
+            createHeart(event);
+
+            
+            if (currentTextIndex < texts.length) {
+                textContainer.innerHTML = texts[currentTextIndex];
+                currentTextIndex++;
+            } else {
+                textContainer.innerHTML = "Люблю тебя!";
+            }
+        });
+
+       
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-10%';
+            heart.style.fontSize = Math.random() * 24 + 12 + 'px';
+            heart.style.animationDuration = Math.random() * 10 + 5 + 's';
+            document.body.appendChild(heart);
+
+          
+            const checkIfAtBottom = () => {
+                const heartRect = heart.getBoundingClientRect();
+                if (heartRect.bottom >= window.innerHeight) {
+                    heart.remove();
+                } else {
+                    requestAnimationFrame(checkIfAtBottom);
+                }
+            };
+            checkIfAtBottom();
+        }, 890);
+    </script>
+</body>
+</html>
